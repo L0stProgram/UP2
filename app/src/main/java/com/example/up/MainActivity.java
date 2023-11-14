@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.up.databinding.ActivityMainBinding;
-import com.example.up.fragments.ArtistFragment;
+import com.example.up.fragments.ClimateFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_fragment, new ArtistFragment(), "artists")
+                .add(R.id.main_fragment, new ClimateFragment(), "artists")
                 .addToBackStack(null)
                 .commit();
     }

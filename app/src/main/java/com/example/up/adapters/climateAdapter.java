@@ -8,22 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.up.R;
 import com.example.up.database.Database;
-import com.example.up.database.entities.artists;
+import com.example.up.database.entities.Climate;
 
 import java.util.List;
 
-public class artistAdapter extends ArrayAdapter<artists> {
+public class climateAdapter extends ArrayAdapter<Climate> {
     private final LayoutInflater inflater;
     private final int layout;
-    private final List<artists> items;
+    private final List<Climate> items;
 
     Database db;
 
-    public artistAdapter(Context context, int resourse, List<artists> items){
+    public climateAdapter(Context context, int resourse, List<Climate> items){
         super(context,resourse,items);
         this.items = items;
         this.layout=resourse;
@@ -42,7 +41,7 @@ public class artistAdapter extends ArrayAdapter<artists> {
         else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        artists item = items.get(position);
+        Climate item = items.get(position);
 
         viewHolder.FirstName.setText(item.artist_first_name);
         viewHolder.LastName.setText(item.artist_last_name);
@@ -50,7 +49,7 @@ public class artistAdapter extends ArrayAdapter<artists> {
     }
 
     private class ViewHolder{
-        final TextView FirstName;
+        final TextView ClimateName;
         final TextView LastName;
         public ViewHolder(View view){
             FirstName = view.findViewById(R.id.artist_first_name);
@@ -59,7 +58,7 @@ public class artistAdapter extends ArrayAdapter<artists> {
     }
 
     @Override
-    public void remove(@Nullable artists object) {
+    public void remove(@Nullable Climate object) {
         if (object == null) {
             return;
         }

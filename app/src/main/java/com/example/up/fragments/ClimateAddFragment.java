@@ -12,32 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.up.R;
-import com.example.up.database.Database;
-import com.example.up.database.entities.artists;
+import com.example.up.database.entities.Climate;
+import com.example.up.database.viewmodels.ClimateViewModel;
 import com.example.up.database.viewmodels.artistsViewModel;
 import com.example.up.databinding.FragmentArtistAddBinding;
-import com.example.up.databinding.FragmentArtistBinding;
 
-public class ArtistAddFragment extends Fragment {
+public class ClimateAddFragment extends Fragment {
     private boolean update;
-    private artists upd;
+    private Climate upd;
 
-    public ArtistAddFragment(boolean update, artists upd) {
+    public ClimateAddFragment(boolean update, Climate upd) {
 
         this.update = update;
 
         this.upd = upd;
     }
 
-    public ArtistAddFragment() {
+    public ClimateAddFragment() {
 
         this.update = false;
         this.upd = null;
     }
 
     FragmentArtistAddBinding binding;
-    artistsViewModel viewModel;
+    ClimateViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class ArtistAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(artistsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ClimateViewModel.class);
         binding = FragmentArtistAddBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -61,11 +59,10 @@ public class ArtistAddFragment extends Fragment {
             binding.addArtistFirstName.setText(upd.artist_first_name);
             binding.addArtistLastName.setText(upd.artist_last_name);
             binding.addArtistUpdate.setOnClickListener(view1 -> {
-                artists item = new artists();
+                Climate item = new Climate();
                 item.artist_first_name = binding.addArtistFirstName.getText().toString();
                 item.artist_last_name = binding.addArtistLastName.getText().toString();
-                Log.d(ArtistAddFragment.class.getName(), String.format("Updating artist with id %d to %s %s", item.artist_id, item.artist_first_name, item.artist_last_name));
-                viewModel.updateArtist(item);
+                viewModel.updateClimate(item);
                 getActivity().getSupportFragmentManager().popBackStack();
             });
         } else {
@@ -74,13 +71,13 @@ public class ArtistAddFragment extends Fragment {
             binding.addArtistSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    artists item = new artists();
+                    Climate item = new Climate();
                     item.artist_first_name = binding.addArtistFirstName.getText().toString();
                     item.artist_last_name = binding.addArtistLastName.getText().toString();
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            viewModel.addArtist(item);
+                            viewModel.addClimate(item);
                         }
                     });
                     getActivity().getSupportFragmentManager().popBackStack();

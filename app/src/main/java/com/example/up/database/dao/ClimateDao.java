@@ -7,19 +7,19 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.up.database.entities.artist_song;
+import com.example.up.database.entities.Climate;
 
 import java.util.List;
 
 @Dao
-public interface artist_songDao {
+public interface ClimateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(artist_song artistSong);
+    void insert(Climate climate);
     @Update
-    void update(artist_song artistSong);
+    void update(Climate climate);
     @Delete
-    void delete(artist_song artistSong);
+    void delete(Climate climate);
 
-    @Query("SELECT * FROM artist_song")
-    List<artist_song> getAllArtistSong();
+    @Query("SELECT * FROM Climate")
+    List<Climate> getAllClimate();
 }

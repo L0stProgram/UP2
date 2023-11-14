@@ -15,14 +15,20 @@
             android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/artist_first_name"/>
+            android:id="@+id/climate_name"/>
 
         <TextView
             android:textColor="@color/black"
             android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/artist_last_name"/>
+            android:id="@+id/climate_temperature"/>
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/climate_humidity"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

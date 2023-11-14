@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ArtistAddFragment">
+    tools:context=".fragments.ClimateAddFragment">
 
     <LinearLayout
         android:orientation="vertical"
@@ -12,22 +12,27 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="first name"
-        android:id="@+id/add_artist_first_name"/>
+        android:hint="Название"
+        android:id="@+id/add_climate_name"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="last name"
-        android:id="@+id/add_artist_last_name"/>
+        android:hint="Температура"
+        android:id="@+id/add_climate_temperature"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Влажность"
+            android:id="@+id/add_climate_humidity"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="save"
-            android:id="@+id/add_artist_save"/>
+            android:id="@+id/add_climate_save"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="update"
-            android:id="@+id/add_artist_update"/>
+            android:id="@+id/add_climate_update"/>
     </LinearLayout>
 </FrameLayout>

@@ -11,31 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.up.R;
-import com.example.up.adapters.artistAdapter;
-import com.example.up.database.entities.artists;
+import com.example.up.adapters.climateAdapter;
 import com.example.up.database.Database;
-import com.example.up.database.viewmodels.artistsViewModel;
+import com.example.up.database.entities.Climate;
+import com.example.up.database.viewmodels.ClimateViewModel;
 import com.example.up.databinding.FragmentArtistBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistFragment extends Fragment {
+public class ClimateFragment extends Fragment {
 
-    FragmentArtistBinding binding;
-    artistsViewModel viewModel;
-    artistAdapter artistAdapt;
+    FragmentClimateBinding binding;
+    ClimateViewModel viewModel;
+    climateAdapter climateAdapt;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        viewModel = new ViewModelProvider(this).get(artistsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ClimateViewModel.class);
         binding = FragmentArtistBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
@@ -43,20 +39,20 @@ public class ArtistFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        showArtistsList();
+        showClimateList();
         addBtnInit();
-        deleteArtist();
-        updateArtist();
+        deleteClimate();
+        updateClimate();
     }
 
-    private void showArtistsList(){
+    private void showClimateList(){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 Database db = Database.getDatabase(getContext());
-                List<artists> artistsList = db.artistDao().getAllArtists();
-                artistAdapt = new artistAdapter(getContext(), R.layout.artist_item, artistsList);
-                binding.artistsView.setAdapter(artistAdapt);
+                List<Climate> ClimatesList = db.ClimateDao().getAllClimate();
+                climateAdapt = new climateAdapter(getContext(), R.layout.artist_item, ClimatesList);
+                binding.artistsView.setAdapter(climateAdapt);
             }
         });
         thread.start();
@@ -69,14 +65,14 @@ public class ArtistFragment extends Fragment {
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_fragment, new ArtistAddFragment(), "artistAdd")
-                        .addToBackStack("artistAdd")
+                        .replace(R.id.main_fragment, new ClimateAddFragment(), "climateAdd")
+                        .addToBackStack("climateAdd")
                         .commit();
             }
         });
     }
 
-    private void deleteArtist(){
+    private void deleteClimate(){
 
         binding.artistsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -84,9 +80,9 @@ public class ArtistFragment extends Fragment {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        artists artists = artistAdapt.getItem(i);
-                        viewModel.deleteArtist(artists);
-                        removeArtistOnMainThread(artists);
+                        Climate climate = climateAdapt.getItem(i);
+                        viewModel.deleteClimate(climate);
+                        removeClimateOnMainThread(climate);
                     }
                 });
                 thread.start();
@@ -95,21 +91,21 @@ public class ArtistFragment extends Fragment {
         });
     }
 
-    private void removeArtistOnMainThread(artists artist) {
+    private void removeClimateOnMainThread(Climate climate) {
         requireActivity().runOnUiThread(() -> {
-            artistAdapt.remove(artist);
+            climateAdapt.remove(climate);
         });
     }
 
-    private void updateArtist(){
+    private void updateClimate(){
         binding.artistsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_fragment, new ArtistAddFragment(true, artistAdapt.getItem(i)), "artistAdd")
-                        .addToBackStack("artistAdd")
+                        .replace(R.id.main_fragment, new ClimateAddFragment(true, climateAdapt.getItem(i)), "climateAdd")
+                        .addToBackStack("climateAdd")
                         .commit();
             }
         });
