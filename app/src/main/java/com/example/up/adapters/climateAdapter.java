@@ -43,17 +43,20 @@ public class climateAdapter extends ArrayAdapter<Climate> {
         }
         Climate item = items.get(position);
 
-        viewHolder.FirstName.setText(item.artist_first_name);
-        viewHolder.LastName.setText(item.artist_last_name);
+        viewHolder.ClimateName.setText(item.climate_name);
+        viewHolder.ClimateHumidity.setText(String.valueOf(item.humidity));
+        viewHolder.ClimateTemperature.setText(String.valueOf(item.temperature));
         return convertView;
     }
 
     private class ViewHolder{
         final TextView ClimateName;
-        final TextView LastName;
+        final TextView ClimateHumidity;
+        final TextView ClimateTemperature;
         public ViewHolder(View view){
-            FirstName = view.findViewById(R.id.artist_first_name);
-            LastName = view.findViewById(R.id.artist_last_name);
+            ClimateName = view.findViewById(R.id.climate_name);
+            ClimateHumidity = view.findViewById(R.id.climate_humidity);
+            ClimateTemperature = view.findViewById(R.id.climate_temperature);
         }
     }
 

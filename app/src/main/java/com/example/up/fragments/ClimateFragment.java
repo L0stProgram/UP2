@@ -17,7 +17,7 @@ import com.example.up.adapters.climateAdapter;
 import com.example.up.database.Database;
 import com.example.up.database.entities.Climate;
 import com.example.up.database.viewmodels.ClimateViewModel;
-import com.example.up.databinding.FragmentArtistBinding;
+import com.example.up.databinding.FragmentClimateBinding;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class ClimateFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         viewModel = new ViewModelProvider(this).get(ClimateViewModel.class);
-        binding = FragmentArtistBinding.inflate(inflater,container,false);
+        binding = FragmentClimateBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
@@ -51,8 +51,8 @@ public class ClimateFragment extends Fragment {
             public void run() {
                 Database db = Database.getDatabase(getContext());
                 List<Climate> ClimatesList = db.ClimateDao().getAllClimate();
-                climateAdapt = new climateAdapter(getContext(), R.layout.artist_item, ClimatesList);
-                binding.artistsView.setAdapter(climateAdapt);
+                climateAdapt = new climateAdapter(getContext(), R.layout.climate_item, ClimatesList);
+                binding.climateView.setAdapter(climateAdapt);
             }
         });
         thread.start();
@@ -74,7 +74,7 @@ public class ClimateFragment extends Fragment {
 
     private void deleteClimate(){
 
-        binding.artistsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        binding.climateView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Thread thread = new Thread(new Runnable() {
@@ -98,7 +98,7 @@ public class ClimateFragment extends Fragment {
     }
 
     private void updateClimate(){
-        binding.artistsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.climateView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 getActivity()

@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.up.database.entities.Climate;
 import com.example.up.database.viewmodels.ClimateViewModel;
-import com.example.up.database.viewmodels.artistsViewModel;
-import com.example.up.databinding.FragmentArtistAddBinding;
+import com.example.up.databinding.FragmentClimateAddBinding;
 
 public class ClimateAddFragment extends Fragment {
     private boolean update;
@@ -34,7 +33,7 @@ public class ClimateAddFragment extends Fragment {
         this.upd = null;
     }
 
-    FragmentArtistAddBinding binding;
+    FragmentClimateAddBinding binding;
     ClimateViewModel viewModel;
 
     @Override
@@ -47,7 +46,7 @@ public class ClimateAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ClimateViewModel.class);
-        binding = FragmentArtistAddBinding.inflate(inflater, container, false);
+        binding = FragmentClimateAddBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -55,25 +54,28 @@ public class ClimateAddFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (update) {
-            binding.addArtistSave.setVisibility(View.GONE);
-            binding.addArtistFirstName.setText(upd.artist_first_name);
-            binding.addArtistLastName.setText(upd.artist_last_name);
-            binding.addArtistUpdate.setOnClickListener(view1 -> {
+            binding.addClimateSave.setVisibility(View.GONE);
+            binding.addClimateName.setText(upd.climate_name);
+            binding.addClimateHumidity.setText(upd.humidity);
+            binding.addClimateTemperature.setText(upd.temperature);
+            binding.addClimateUpdate.setOnClickListener(view1 -> {
                 Climate item = new Climate();
-                item.artist_first_name = binding.addArtistFirstName.getText().toString();
-                item.artist_last_name = binding.addArtistLastName.getText().toString();
+                item.climate_name = binding.addClimateName.getText().toString();
+                item.humidity = Integer.getInteger(binding.addClimateHumidity.toString());
+                item.temperature = Integer.getInteger(binding.addClimateTemperature.toString());
                 viewModel.updateClimate(item);
                 getActivity().getSupportFragmentManager().popBackStack();
             });
         } else {
 
-            binding.addArtistUpdate.setVisibility(View.GONE);
-            binding.addArtistSave.setOnClickListener(new View.OnClickListener() {
+            binding.addClimateUpdate.setVisibility(View.GONE);
+            binding.addClimateSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Climate item = new Climate();
-                    item.artist_first_name = binding.addArtistFirstName.getText().toString();
-                    item.artist_last_name = binding.addArtistLastName.getText().toString();
+                    item.climate_name = binding.addClimateName.getText().toString();
+                    item.humidity = Integer.parseInt(binding.addClimateHumidity.getText().toString());
+                    item.temperature = Integer.parseInt(binding.addClimateTemperature.getText().toString());
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {

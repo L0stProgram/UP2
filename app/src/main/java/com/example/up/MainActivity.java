@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_fragment, new ClimateFragment(), "artists")
+                .add(R.id.main_fragment, new ClimateFragment(), "climates")
                 .addToBackStack(null)
                 .commit();
     }
